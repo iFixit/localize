@@ -19,7 +19,7 @@ if (!!window.JsTranslations) {
  * won't have to localize the js file into every language when it is built.
  */
 function _js(origString) {
-   if (App && App.showTranslatedPlaceholder) {
+   if (window.App && window.App.showTranslatedPlaceholder) {
       return 'Translated';
    }
 

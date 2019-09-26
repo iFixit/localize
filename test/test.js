@@ -1,6 +1,6 @@
 const { add } = require('./window.translations.js');
 var assert = require('assert');
-const {_js, ___p} = require('../src/lib/translations.js');
+const {_js, ___p} = require('../src/translations.js');
 
 describe('_js', function() {
    it('should translate!', function() {

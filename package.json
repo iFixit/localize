@@ -1,8 +1,8 @@
 {
   "name": "@ifixit/localize",
   "version": "1.0.0",
-  "main": "dist/index.js",
-  "module": "dist/index.js",
+  "main": "dist/translations.js",
+  "module": "dist/translations.js",
   "files": [
     "dist"
   ],

@@ -48,4 +48,4 @@ function ___p(number, singleString, pluralString, ...args) {
       : _js(pluralString, ...args);
 }
 
-export { _js, ___p };
+module.exports = { _js, ___p };

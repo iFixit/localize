@@ -1,14 +1,7 @@
 let UITranslations = null;
 
-if (typeof window !== 'undefined') {
-   if (!!window.JsTranslations) {
-      UITranslations = window.JsTranslations;
-   } else {
-      const err = "UI Translations not found! Falling back to English...";
-      console.error(err);
-      const englishFallback = {};
-      UITranslations = englishFallback;
-   }
+if (typeof window !== 'undefined' && !!window.JsTranslations) {
+   UITranslations = window.JsTranslations;
 }
 
 /**
@@ -33,6 +26,8 @@ function _js(origString) {
       return 'Translated';
    }
 
+   validateTranslations();
+
    const compactedString = String(origString).replace(/\s{2,}/g, ' ');
 
    var translated = UITranslations[compactedString] || compactedString;
@@ -56,6 +51,14 @@ function ___p(number, singleString, pluralString, ...args) {
    return number === 1
       ? _js(singleString, ...args)
       : _js(pluralString, ...args);
+}
+
+function validateTranslations() {
+   if (UITranslations) {
+      return;
+   }
+   console.error("UI Translations not found! Falling back to returning the input string. Try setTranslations() or window.JsTranslations");
+   UITranslations = {};
 }
 
 export { _js, ___p, setTranslations };

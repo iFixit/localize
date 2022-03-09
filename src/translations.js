@@ -1,12 +1,22 @@
-var UITranslations;
+let UITranslations = null;
 
-if (!!window.JsTranslations) {
-   UITranslations = window.JsTranslations;
-} else {
-   const err = "UI Translations not found! Falling back to English...";
-   console.error(err);
-   const englishFallback = {};
-   UITranslations = englishFallback;
+if (typeof window !== 'undefined') {
+   if (!!window.JsTranslations) {
+      UITranslations = window.JsTranslations;
+   } else {
+      const err = "UI Translations not found! Falling back to English...";
+      console.error(err);
+      const englishFallback = {};
+      UITranslations = englishFallback;
+   }
+}
+
+/**
+ * Set the translation lookup directly instead of loading from
+ * window.JsTranslations
+ */
+function setTranslations(translations) {
+   UITranslations = translations;
 }
 
 /**
@@ -19,7 +29,7 @@ if (!!window.JsTranslations) {
  * won't have to localize the js file into every language when it is built.
  */
 function _js(origString) {
-   if (window.App && window.App.showTranslatedPlaceholder) {
+   if (typeof window !== 'undefined' && window.App && window.App.showTranslatedPlaceholder) {
       return 'Translated';
    }
 
@@ -48,4 +58,4 @@ function ___p(number, singleString, pluralString, ...args) {
       : _js(pluralString, ...args);
 }
 
-export { _js, ___p };
+export { _js, ___p, setTranslations };

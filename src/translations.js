@@ -1,12 +1,15 @@
-var UITranslations;
+let UITranslations = null;
 
-if (!!window.JsTranslations) {
+if (typeof window !== 'undefined' && !!window.JsTranslations) {
    UITranslations = window.JsTranslations;
-} else {
-   const err = "UI Translations not found! Falling back to English...";
-   console.error(err);
-   const englishFallback = {};
-   UITranslations = englishFallback;
+}
+
+/**
+ * Set the translation lookup directly instead of loading from
+ * window.JsTranslations
+ */
+function setTranslations(translations) {
+   UITranslations = translations;
 }
 
 /**
@@ -19,9 +22,11 @@ if (!!window.JsTranslations) {
  * won't have to localize the js file into every language when it is built.
  */
 function _js(origString) {
-   if (window.App && window.App.showTranslatedPlaceholder) {
+   if (typeof window !== 'undefined' && window.App && window.App.showTranslatedPlaceholder) {
       return 'Translated';
    }
+
+   validateTranslations();
 
    const compactedString = String(origString).replace(/\s{2,}/g, ' ');
 
@@ -48,4 +53,12 @@ function ___p(number, singleString, pluralString, ...args) {
       : _js(pluralString, ...args);
 }
 
-export { _js, ___p };
+function validateTranslations() {
+   if (UITranslations) {
+      return;
+   }
+   console.error("UI Translations not found! Falling back to returning the input string. Try setTranslations() or window.JsTranslations");
+   UITranslations = {};
+}
+
+export { _js, ___p, setTranslations };

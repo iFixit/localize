@@ -5,4 +5,4 @@ export function ___p(
    pluralString: string,
    ...replacements: string[]
 ): string;
-export function setTranslations(translations: any): void;
+export function setTranslations(translations: Record<string, string>): void;

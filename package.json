@@ -3,9 +3,10 @@
   "version": "1.1.0",
   "homepage": "https://github.com/iFixit/localize",
   "main": "dist/translations.js",
+  "types": "./localize.d.ts",
   "module": "dist/translations.js",
   "files": [
-    "dist"
+    "dist", "localize.d.ts"
   ],
   "scripts": {
     "test": "node ./test/test.mjs",

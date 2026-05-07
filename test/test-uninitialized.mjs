@@ -1,6 +1,11 @@
-import { test } from 'node:test';
+import { test, beforeEach } from 'node:test';
 import { strict as assert } from 'node:assert';
-import { _js } from '../src/translations.js';
+import { _js, setTranslations } from '../src/translations.js';
+
+beforeEach(() => {
+   // Reset the translations state before each test
+   setTranslations(undefined);
+});
 
 test('_js: falls back to returning the input string when no translations are set', (t) => {
    const errors = [];
@@ -15,5 +20,5 @@ test('_js: only logs the missing-translations warning once', (t) => {
    t.mock.method(console, 'error', (msg) => errors.push(msg));
    _js('first');
    _js('second');
-   assert.equal(errors.length, 0);
+   assert.equal(errors.length, 1);
 });

@@ -4,6 +4,7 @@
   "homepage": "https://github.com/iFixit/localize",
   "main": "dist/translations.js",
   "types": "./localize.d.ts",
+  "type": "module",
   "module": "dist/translations.js",
   "files": [
     "dist", "localize.d.ts"
